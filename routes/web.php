@@ -18,11 +18,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::get("/participant", [HomeController::class, "indexParticipant"])->name("participant")->middleware("auth");
 
-Route::get("/organizer", [HomeController::class, "indexOrganizer"])->name("organizer")->middleware(["auth" , "organizer"]);
+Route::get("/organizer", [HomeController::class, "indexOrganizer"])->name("organizer")->middleware(["auth", "organizer"]);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/tasks', [TaskController::class, 'index']);
+    Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+
+    Route::middleware('role:manager')->group(function () {
+        Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+        Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+    });
+
+    Route::post('/tasks/{task}/done', [TaskController::class, 'markDone'])->name('tasks.done');
 });
+
 require __DIR__.'/auth.php';

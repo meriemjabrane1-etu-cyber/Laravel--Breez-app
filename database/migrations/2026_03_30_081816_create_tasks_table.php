@@ -13,21 +13,11 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-
             $table->string('title');
             $table->text('description')->nullable();
-
-            $table->foreignId('assigned_to')
-                ->constrained('users')
-                ->onDelete('cascade');
-
-            $table->foreignId('created_by')
-                ->constrained('users')
-                ->onDelete('cascade');
-
-            $table->string('status')->default('pending');
-            // pending | done
-
+            $table->foreignId('assigned_to')->constrained('users')->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->enum('status', ['pending', 'done'])->default('pending');
             $table->timestamps();
         });
     }

@@ -1,14 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">
+        <h2 class="font-semibold text-xl text-yellow-50 ">
             Participant Dashboard
         </h2>
     </x-slot>
 
-    <div class="p-6">
-        <h1 class="text-2xl">Welcome {{ auth()->user()->name }}</h1>
-        <p>Your role: {{ auth()->user()->role }}</p>
+    <div class="p-6 text-slate-100 ">
+        <h1>Welcome {{ auth()->user()->name }} </h1>
+        <p>Role: {{ auth()->user()->role }}</p>
     </div>
 </x-app-layout>
-
-
+ 

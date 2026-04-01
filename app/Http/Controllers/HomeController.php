@@ -8,11 +8,11 @@ class HomeController extends Controller
 {
      public function indexParticipant()
     {
-        return view('participant');
+        return view('home.participant');
     }
 
     public function indexOrganizer()
     {
-        return view('organizer');
+        return view('home.organizer');
     }
 }
